@@ -54,11 +54,12 @@ def net_id_name_conversion(net_id):
 
 def get_event_logs(net_id, product_type):
     dashboard = meraki.DashboardAPI(api_key=os.environ['MERAKI_API_TOKEN'], output_log=False, print_console=True)
+    print(f"exporting logs for network {net_id_name_conversion(net_id)} {product_type} logs")
     response = dashboard.networks.getNetworkEvents(
         net_id,
-        total_pages='all',
+        total_pages=1,
         productType=product_type,
-        perPage = 1000
+        perPage=3
     )
     network_name = net_id_name_conversion(net_id)
     event_logs_df = pd.DataFrame(response)
