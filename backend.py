@@ -57,9 +57,9 @@ def get_event_logs(net_id, product_type):
     print(f"exporting logs for network {net_id_name_conversion(net_id)} {product_type} logs")
     response = dashboard.networks.getNetworkEvents(
         net_id,
-        total_pages=1,
+        total_pages='all',
         productType=product_type,
-        perPage=3
+        perPage=1000
     )
     network_name = net_id_name_conversion(net_id)
     event_logs_df = pd.DataFrame(response)
